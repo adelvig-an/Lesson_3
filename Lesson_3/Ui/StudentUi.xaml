@@ -31,6 +31,10 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1">
                 <TextBlock Margin="5" Text="Фамилия" />
@@ -47,30 +51,59 @@
                 <TextBlock Margin="5" Text="Курс университета" />
                 <TextBox Margin="5,0" Text="{Binding Student.YearUniversity}" />
             </StackPanel>
+
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="1"
+                Grid.ColumnSpan="3">
+                <Button
+                    Name="SaveStudent"
+                    Margin="15"
+                    Padding="5"
+                    VerticalAlignment="Center"
+                    Content="Добавить студента" />
+            </StackPanel>
         </Grid>
-        <DataGrid
-            x:Name="dgStudentList"
-            Grid.Row="1"
-            Margin="10"
-            AlternatingRowBackground="White"
-            FontSize="16"
-            FontWeight="SemiBold"
-            HorizontalGridLinesBrush="DarkGray"
-            RowBackground="LightGray">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="200"
-                    Header="ФИО"
-                    IsReadOnly="False" />
-                <DataGridTextColumn
-                    Width="120"
-                    Header="Возраст, лет"
-                    IsReadOnly="False" />
-                <DataGridTextColumn
-                    Width="*"
-                    Header="Курс"
-                    IsReadOnly="False" />
-            </DataGrid.Columns>
-        </DataGrid>
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid
+                x:Name="dgStudentList"
+                Margin="10"
+                AutoGenerateColumns="False"
+                FontSize="16"
+                ItemsSource="{Binding StudentList}">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Width="30" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding StudentList.FullName}"
+                        Header="ФИО"
+                        IsReadOnly="False" />
+                    <DataGridTextColumn
+                        Width="120"
+                        Binding="{Binding StudentList.Age}"
+                        Header="Возраст, лет"
+                        IsReadOnly="False" />
+                    <DataGridTextColumn
+                        Width="120"
+                        Binding="{Binding StudentList.YearUniversity}"
+                        Header="Курс"
+                        IsReadOnly="False" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button
+                Grid.Column="1"
+                Margin="10"
+                Padding="5"
+                VerticalAlignment="Center"
+                Content="Удалить студента" />
+
+        </Grid>
     </Grid>
 </UserControl>
