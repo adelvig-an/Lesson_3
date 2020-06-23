@@ -61,7 +61,8 @@
                     Margin="15"
                     Padding="5"
                     VerticalAlignment="Center"
-                    Content="Добавить студента" />
+                    Content="Добавить студента"
+                    Command="{Binding AddStudent}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -75,23 +76,24 @@
                 x:Name="dgStudentList"
                 Margin="10"
                 AutoGenerateColumns="False"
-                FontSize="16"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
                 ItemsSource="{Binding StudentList}">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Width="30" />
                     <DataGridTextColumn
                         Width="*"
-                        Binding="{Binding StudentList.FullName}"
+                        Binding="{Binding FullName}"
                         Header="ФИО"
                         IsReadOnly="False" />
                     <DataGridTextColumn
                         Width="120"
-                        Binding="{Binding StudentList.Age}"
+                        Binding="{Binding Age}"
                         Header="Возраст, лет"
                         IsReadOnly="False" />
                     <DataGridTextColumn
                         Width="120"
-                        Binding="{Binding StudentList.YearUniversity}"
+                        Binding="{Binding YearUniversity}"
                         Header="Курс"
                         IsReadOnly="False" />
                 </DataGrid.Columns>
