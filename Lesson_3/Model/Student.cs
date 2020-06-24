@@ -13,5 +13,6 @@ namespace Lesson_3.Model
         public int Age { get; set; }
         public string YearUniversity { get; set; }
         public string FullName { get; set; }
+        public bool IsStudent { get; set; }
     }
 }

@@ -80,7 +80,7 @@
                 CanUserDeleteRows="False"
                 ItemsSource="{Binding StudentList}">
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Width="30" />
+                    <DataGridCheckBoxColumn Width="30" Binding="{Binding IsStudent}" />
                     <DataGridTextColumn
                         Width="*"
                         Binding="{Binding FullName}"
@@ -104,8 +104,7 @@
                 Margin="10"
                 Padding="5"
                 VerticalAlignment="Center"
-                Content="Удалить студента" />
-
+                Content="Удалить студента" Command="{Binding RemoveStudent}" />
         </Grid>
     </Grid>
 </UserControl>

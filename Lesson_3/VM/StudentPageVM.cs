@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -32,11 +33,12 @@ namespace Lesson_3.VM
                 new Student
                 {
                     FullName = Student.MiddleName+" "+Student.FirstName+" "+Student.LastName,
-                    Age = 18,
-                    YearUniversity = Student.YearUniversity
+                    Age = AgeResalt,
+                    YearUniversity = Student.YearUniversity,
                 }
             };
             AddStudent = new RelayCommand(_ => AddStudentAction());
+            RemoveStudent = new RelayCommand(_ => RemoveStudentAction(Student));
         }
 
         private string text;
@@ -60,33 +62,58 @@ namespace Lesson_3.VM
             get => text;
             set => SetProperty(ref text, value);
         }
-
-        private DateTime dateTimeText;
-        public DateTime DateTimeText
+        private DateTime dateBirthText;
+        public DateTime DateBirthText
         {
-            get => dateTimeText;
-            set => SetProperty(ref dateTimeText, value);
+            get => dateBirthText;
+            set => SetProperty(ref dateBirthText, value);
         }
 
-        //public int AgeResalt
-        //{
-        //    get
-        //    {
-        //        int a;
-        //        a = Convert.ToString(DateTimeText.DateTime);
-        //        var date = DateTime.ParseExact(a, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-        //        var age = DateTime.Now.Year - date.Year;
-        //        if (DateTime.Now.Month < date.Month ||
-        //           (DateTime.Now.Month == date.Month && DateTime.Now.Day < date.Day)) age--;
-                
-        //        return age;
-        //    }
-        //}
 
+        //Расчет возраста от даты рождения
+        public int AgeResalt
+        {
+            get
+            {
+                var age = DateTime.Now.Year - Student.DateBirth.Year;
+                if (DateTime.Now.Month < Student.DateBirth.Month ||
+                   (DateTime.Now.Month == Student.DateBirth.Month && DateTime.Now.Day < Student.DateBirth.Day)) age--;
+
+                return age;
+            }
+        }
+        
+        //Добавление данных Студента
         public ICommand AddStudent { get; }
         public void AddStudentAction()
         {
-            StudentList.Add(new Student());
+            StudentList.Add(new Student()
+            {
+                FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
+                Age = AgeResalt,
+                YearUniversity = Student.YearUniversity
+            });
+        }
+
+        //private bool isStudent;
+        //public bool IsStudent
+        //{
+        //    get => isStudent;
+        //    set => SetProperty(ref isStudent, value);
+        //}
+
+        //Удаление данных Студента
+        public ICommand RemoveStudent { get; }
+        public void RemoveStudentAction(Student student)
+        {
+            for (int i = 0; i < StudentList.Count; i++)
+            {
+                if (Student.IsStudent == true)
+                {
+                    StudentList.Remove(student);
+                }
+            }
+            
         }
     }
 }
