@@ -38,18 +38,18 @@
 
             <StackPanel Grid.Column="1">
                 <TextBlock Margin="5" Text="Фамилия" />
-                <TextBox Margin="5,0" Text="{Binding Student.MiddleName}" />
+                <TextBox Margin="5,0" Text="{Binding MiddleNameText}" />
                 <TextBlock Margin="5" Text="Имя" />
-                <TextBox Margin="5,0" Text="{Binding Student.FirstName}" />
+                <TextBox Margin="5,0" Text="{Binding FirstNameText}" />
                 <TextBlock Margin="5" Text="Отчество" />
-                <TextBox Margin="5,0" Text="{Binding Student.LastName}" />
+                <TextBox Margin="5,0" Text="{Binding LastNameText}" />
             </StackPanel>
 
             <StackPanel Grid.Column="3">
                 <TextBlock Margin="5" Text="Дата рождения" />
-                <DatePicker Margin="5,0" SelectedDate="{Binding Student.DateBirth}" />
+                <DatePicker Margin="5,0" SelectedDate="{Binding DateBirthText}" />
                 <TextBlock Margin="5" Text="Курс университета" />
-                <TextBox Margin="5,0" Text="{Binding Student.YearUniversity}" />
+                <TextBox Margin="5,0" Text="{Binding YearUniversityText}" />
             </StackPanel>
 
             <StackPanel

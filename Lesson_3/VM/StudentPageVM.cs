@@ -22,20 +22,20 @@ namespace Lesson_3.VM
         {
             Student = new Student
             {
-                MiddleName = "Иванов",
-                FirstName = "Сергей",
-                LastName = "Викторович",
-                DateBirth = new DateTime(2002, 05, 04),
-                YearUniversity = "2 курс"
+                MiddleName = MiddleNameText,
+                FirstName = FirstNameText,
+                LastName = LastNameText,
+                DateBirth = DateBirthText,
+                YearUniversity = YearUniversityText
             };
             
             StudentList = new ObservableCollection<Student>()
             {
                 new Student
                 {
-                    FullName = Student.MiddleName+" "+Student.FirstName+" "+Student.LastName,
-                    Age = AgeResalt,
-                    YearUniversity = Student.YearUniversity,
+                    //FullName = Student.MiddleName+" "+Student.FirstName+" "+Student.LastName,
+                    //Age = AgeResalt,
+                    //YearUniversity = Student.YearUniversity,
                 }
             };
             
@@ -49,7 +49,10 @@ namespace Lesson_3.VM
         public string MiddleNameText
         {
             get => text;
-            set => SetProperty(ref text, value);
+            set
+            {
+                SetProperty(ref text, value);
+            }
         }
         public string FirstNameText
         {
