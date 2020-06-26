@@ -99,13 +99,6 @@ namespace Lesson_3.VM
             });
         }
 
-        //private bool isStudent;
-        //public bool IsStudent
-        //{
-        //    get => isStudent;
-        //    set => SetProperty(ref isStudent, value);
-        //}
-
         //Удаление данных Студента
         public ICommand RemoveStudent { get; }
         public void RemoveStudentAction()
@@ -114,18 +107,9 @@ namespace Lesson_3.VM
 
             foreach (var student in StudentList2)
             {
-                if (Student.IsStudent == true)
+                if (student.IsStudent == true)
                     StudentList.Remove(student);
             }
-
-            //for (int i = 0; i < StudentList.Count; i++)
-            //{
-            //    if (Student.IsStudent == true)
-            //    {
-            //        StudentList.Remove(Student);
-            //    }
-            //}
-            
         }
     }
 }
