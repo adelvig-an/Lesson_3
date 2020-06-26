@@ -17,6 +17,7 @@ namespace Lesson_3.VM
         public Student Student { get; }
         
         public static ObservableCollection<Student> StudentList { get; set; }
+        public static ObservableCollection<Student> StudentList2 { get; set; }
         public StudentPageVM()
         {
             Student = new Student
@@ -37,8 +38,11 @@ namespace Lesson_3.VM
                     YearUniversity = Student.YearUniversity,
                 }
             };
+            
+            
+            
             AddStudent = new RelayCommand(_ => AddStudentAction());
-            RemoveStudent = new RelayCommand(_ => RemoveStudentAction(Student));
+            RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
         }
 
         private string text;
@@ -104,15 +108,23 @@ namespace Lesson_3.VM
 
         //Удаление данных Студента
         public ICommand RemoveStudent { get; }
-        public void RemoveStudentAction(Student student)
+        public void RemoveStudentAction()
         {
-            for (int i = 0; i < StudentList.Count; i++)
+            StudentList2 = new ObservableCollection<Student>(StudentList);
+
+            foreach (var student in StudentList2)
             {
                 if (Student.IsStudent == true)
-                {
                     StudentList.Remove(student);
-                }
             }
+
+            //for (int i = 0; i < StudentList.Count; i++)
+            //{
+            //    if (Student.IsStudent == true)
+            //    {
+            //        StudentList.Remove(Student);
+            //    }
+            //}
             
         }
     }
