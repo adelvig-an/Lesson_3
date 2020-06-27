@@ -38,18 +38,18 @@
 
             <StackPanel Grid.Column="1">
                 <TextBlock Margin="5" Text="Фамилия" />
-                <TextBox Margin="5,0" Text="{Binding MiddleNameText}" />
+                <TextBox Margin="5,0" Text="{Binding Student.MiddleName}" />
                 <TextBlock Margin="5" Text="Имя" />
-                <TextBox Margin="5,0" Text="{Binding FirstNameText}" />
+                <TextBox Margin="5,0" Text="{Binding Student.FirstName}" />
                 <TextBlock Margin="5" Text="Отчество" />
-                <TextBox Margin="5,0" Text="{Binding LastNameText}" />
+                <TextBox Margin="5,0" Text="{Binding Student.LastName}" />
             </StackPanel>
 
             <StackPanel Grid.Column="3">
                 <TextBlock Margin="5" Text="Дата рождения" />
-                <DatePicker Margin="5,0" SelectedDate="{Binding DateBirthText}" />
+                <DatePicker Margin="5,0" SelectedDate="{Binding Student.DateBirth}" />
                 <TextBlock Margin="5" Text="Курс университета" />
-                <TextBox Margin="5,0" Text="{Binding YearUniversityText}" />
+                <TextBox Margin="5,0" Text="{Binding Student.YearUniversity}" />
             </StackPanel>
 
             <StackPanel
@@ -61,8 +61,8 @@
                     Margin="15"
                     Padding="5"
                     VerticalAlignment="Center"
-                    Content="Добавить студента"
-                    Command="{Binding AddStudent}"/>
+                    Command="{Binding AddStudent}"
+                    Content="Добавить студента" />
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
@@ -78,7 +78,10 @@
                 AutoGenerateColumns="False"
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
-                ItemsSource="{Binding StudentList}">
+                ItemsSource="{Binding StudentList}"
+                SelectedItem="{Binding SelectedStudents}"
+                SelectionMode="Extended"
+                VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Width="30" Binding="{Binding IsStudent}" />
                     <DataGridTextColumn
@@ -99,12 +102,27 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Button
-                Grid.Column="1"
-                Margin="10"
-                Padding="5"
-                VerticalAlignment="Center"
-                Content="Удалить студента" Command="{Binding RemoveStudent}" />
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <Button
+                    Margin="10"
+                    Padding="5"
+                    VerticalAlignment="Center"
+                    Command="{Binding RemoveStudent}"
+                    Content="Удалить отмеченные" />
+                <Button
+                    Margin="10"
+                    Padding="5"
+                    VerticalAlignment="Center"
+                    Command="{Binding DeleteRowCommand}"
+                    Content="Удалить выделенную строку" />
+                <Button
+                    Margin="10"
+                    Padding="5"
+                    VerticalAlignment="Center"
+                    Command="{Binding FullDelete}"
+                    Content="Удалить всех" />
+            </StackPanel>
+
         </Grid>
     </Grid>
 </UserControl>

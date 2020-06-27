@@ -22,11 +22,11 @@ namespace Lesson_3.VM
         {
             Student = new Student
             {
-                MiddleName = MiddleNameText,
-                FirstName = FirstNameText,
-                LastName = LastNameText,
-                DateBirth = DateBirthText,
-                YearUniversity = YearUniversityText
+                //MiddleName = "Иванов",
+                //FirstName = "Сергей",
+                //LastName = "Викторович",
+                //DateBirth = new DateTime(2002, 05, 04),
+                //YearUniversity = "2 курс"
             };
             
             StudentList = new ObservableCollection<Student>()
@@ -43,39 +43,9 @@ namespace Lesson_3.VM
             
             AddStudent = new RelayCommand(_ => AddStudentAction());
             RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
+            DeleteRowCommand = new RelayCommand(_ => DeleteCurrentSelected());
+            FullDelete = new RelayCommand(_ => FullDeleteAction());
         }
-
-        private string text;
-        public string MiddleNameText
-        {
-            get => text;
-            set
-            {
-                SetProperty(ref text, value);
-            }
-        }
-        public string FirstNameText
-        {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
-        public string LastNameText
-        {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
-        public string YearUniversityText
-        {
-            get => text;
-            set => SetProperty(ref text, value);
-        }
-        private DateTime dateBirthText;
-        public DateTime DateBirthText
-        {
-            get => dateBirthText;
-            set => SetProperty(ref dateBirthText, value);
-        }
-
 
         //Расчет возраста от даты рождения
         public int AgeResalt
@@ -102,7 +72,7 @@ namespace Lesson_3.VM
             });
         }
 
-        //Удаление данных Студента
+        //Удаление данных Студента по значению в чекбоксе
         public ICommand RemoveStudent { get; }
         public void RemoveStudentAction()
         {
@@ -114,5 +84,42 @@ namespace Lesson_3.VM
                     StudentList.Remove(student);
             }
         }
+
+        //Удаление выделеной строки
+        private Student selectedStudents;
+        public Student SelectedStudents
+        {
+            get => selectedStudents;
+            set 
+            {
+                selectedStudents = value;
+                OnPropertyChanged(nameof(SelectedStudents));
+            }
+        }
+        public ICommand DeleteRowCommand { get; }
+        public void DeleteCurrentSelected()
+        {
+            //StudentList2 = new ObservableCollection<Student>(StudentList);
+            
+            if (SelectedStudents != null)
+            {
+                StudentList.Remove(SelectedStudents);
+                SelectedStudents = null;
+            }
+        }
+
+        //Удаление всех значений
+        public ICommand FullDelete { get; }
+        public void FullDeleteAction()
+        {
+            StudentList2 = new ObservableCollection<Student>(StudentList);
+
+            foreach (var student in StudentList2)
+            {
+                if (student != null)
+                    StudentList.Remove(student);
+            }
+        }
+
     }
 }
