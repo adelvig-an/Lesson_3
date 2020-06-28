@@ -79,8 +79,8 @@
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
                 ItemsSource="{Binding StudentList}"
-                SelectedItem="{Binding SelectedStudents}"
                 SelectionMode="Extended"
+                SelectionUnit="FullRow"
                 VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Width="30" Binding="{Binding IsStudent}" />
@@ -114,6 +114,7 @@
                     Padding="5"
                     VerticalAlignment="Center"
                     Command="{Binding DeleteRowCommand}"
+                    CommandParameter="{Binding SelectedItems, ElementName=dgStudentList}"
                     Content="Удалить выделенную строку" />
                 <Button
                     Margin="10"

@@ -1,5 +1,6 @@
 ﻿using Lesson_3.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Globalization;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
+using System.Windows.Automation;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
@@ -43,9 +45,27 @@ namespace Lesson_3.VM
             
             AddStudent = new RelayCommand(_ => AddStudentAction());
             RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
-            DeleteRowCommand = new RelayCommand(_ => DeleteCurrentSelected());
+            DeleteRowCommand = new RelayCommand(SelectedItems => DeleteCurrentSelected(SelectedStudent));
             FullDelete = new RelayCommand(_ => FullDeleteAction());
         }
+
+        private static readonly IList SelectedStudent;
+        private readonly Object SelectedItems = (IList)SelectedStudent;
+
+        public ICommand DeleteRowCommand { get; }
+        public void DeleteCurrentSelected(IList SelectedStudent)
+        {
+            foreach (var student in SelectedStudent)
+            {
+                if (student != null)
+                {
+                    SelectedStudent.Remove(SelectedItems);
+                }
+            }
+            
+
+        }
+
 
         //Расчет возраста от даты рождения
         public int AgeResalt
@@ -86,27 +106,17 @@ namespace Lesson_3.VM
         }
 
         //Удаление выделеной строки
-        private Student selectedStudents;
-        public Student SelectedStudents
-        {
-            get => selectedStudents;
-            set 
-            {
-                selectedStudents = value;
-                OnPropertyChanged(nameof(SelectedStudents));
-            }
-        }
-        public ICommand DeleteRowCommand { get; }
-        public void DeleteCurrentSelected()
-        {
-            //StudentList2 = new ObservableCollection<Student>(StudentList);
-            
-            if (SelectedStudents != null)
-            {
-                StudentList.Remove(SelectedStudents);
-                SelectedStudents = null;
-            }
-        }
+        //private IList selectedItems;
+        //public IList SelectedItems
+        //{
+        //    get => selectedItems;
+        //    set 
+        //    {
+        //        selectedItems = value;
+        //    }
+        //}
+
+        
 
         //Удаление всех значений
         public ICommand FullDelete { get; }

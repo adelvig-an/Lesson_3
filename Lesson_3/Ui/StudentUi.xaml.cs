@@ -22,5 +22,10 @@ namespace Lesson_3.Ui
         {
             InitializeComponent();
         }
+
+        private void dgStudentList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
