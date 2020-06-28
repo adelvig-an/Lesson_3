@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
@@ -45,25 +46,22 @@ namespace Lesson_3.VM
             
             AddStudent = new RelayCommand(_ => AddStudentAction());
             RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
-            DeleteRowCommand = new RelayCommand(SelectedItems => DeleteCurrentSelected(SelectedStudent));
+            DeleteRowCommand = new RelayCommand(SelectedItems => DeleteCurrentSelected(SelectedItems));
             FullDelete = new RelayCommand(_ => FullDeleteAction());
         }
 
-        private static readonly IList SelectedStudent;
-        private readonly Object SelectedItems = (IList)SelectedStudent;
-
         public ICommand DeleteRowCommand { get; }
-        public void DeleteCurrentSelected(IList SelectedStudent)
+        public void DeleteCurrentSelected(object SelectedItems)
         {
+            IList SelectedStudent = (IList)SelectedItems;
+
             foreach (var student in SelectedStudent)
             {
                 if (student != null)
                 {
-                    SelectedStudent.Remove(SelectedItems);
+                    StudentList.Remove(student);
                 }
             }
-            
-
         }
 
 
@@ -99,11 +97,10 @@ namespace Lesson_3.VM
             StudentList2 = new ObservableCollection<Student>(StudentList);
 
             foreach (var student in StudentList2)
-            {
                 if (student.IsStudent == true)
                     StudentList.Remove(student);
-            }
         }
+
 
         //Удаление выделеной строки
         //private IList selectedItems;
