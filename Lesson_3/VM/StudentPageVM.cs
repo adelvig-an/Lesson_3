@@ -54,12 +54,17 @@ namespace Lesson_3.VM
         public void DeleteCurrentSelected(object SelectedItems)
         {
             IList SelectedStudent = (IList)SelectedItems;
+            //IList SelectedStudent = SelectedItems as IList;
 
             foreach (var student in SelectedStudent)
             {
                 if (student != null)
                 {
-                    StudentList.Remove(student);
+                    if (student is Student)
+                    {
+                        StudentList.Remove(student as Student);
+                    }
+                    
                 }
             }
         }
