@@ -42,8 +42,6 @@ namespace Lesson_3.VM
                 }
             };
             
-            
-            
             AddStudent = new RelayCommand(_ => AddStudentAction());
             RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
             DeleteRowCommand = new RelayCommand(SelectedItems => DeleteCurrentSelected(SelectedItems));
@@ -52,6 +50,7 @@ namespace Lesson_3.VM
 
         public ICommand DeleteRowCommand { get; }
 
+        //Удаление выделенных строк
         public void DeleteCurrentSelected(object p) 
         { 
             IList selectedItems = (IList)p; 
@@ -96,20 +95,6 @@ namespace Lesson_3.VM
                 if (student.IsStudent == true)
                     StudentList.Remove(student);
         }
-
-
-        //Удаление выделеной строки
-        //private IList selectedItems;
-        //public IList SelectedItems
-        //{
-        //    get => selectedItems;
-        //    set 
-        //    {
-        //        selectedItems = value;
-        //    }
-        //}
-
-        
 
         //Удаление всех значений
         public ICommand FullDelete { get; }

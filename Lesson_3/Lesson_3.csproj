@@ -6,4 +6,8 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Json.Net" Version="1.0.23" />
+  </ItemGroup>
+
 </Project>
