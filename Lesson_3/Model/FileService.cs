@@ -5,21 +5,21 @@ using System.Text;
 
 namespace Lesson_3.Model
 {
-    public abstract class File
+    public abstract class FileService
     {
         private readonly string PATH;
 
-        public File(string path)
-        {
-            PATH = path;
-        }
+        //public FileService(string path)
+        //{
+        //    PATH = path;
+        //}
         
-        public ObservableCollection<Student> LoadData()
+        public IEnumerable<Student> LoadData()
         {
             return null;
         }
 
-        public void SaveData (ObservableCollection<Student> studentList)
+        public void SaveData (IEnumerable<Student> studentList)
         {
 
         }
