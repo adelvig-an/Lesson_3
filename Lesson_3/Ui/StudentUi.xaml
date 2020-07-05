@@ -34,6 +34,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Column="1">
@@ -57,13 +58,40 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="3">
                 <Button
-                    Name="SaveStudent"
-                    Margin="15"
+                    Name="AddStudent"
+                    Margin="10"
                     Padding="5"
                     VerticalAlignment="Center"
                     Command="{Binding AddStudent}"
                     Content="Добавить студента" />
             </StackPanel>
+
+            <StackPanel
+                Grid.Column="4"
+                Margin="15"
+                VerticalAlignment="Center"
+                Orientation="Vertical">
+                <Button
+                    Name="SaveStudent"
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="10"
+                    Padding="5"
+                    VerticalAlignment="Center"
+                    Command="{Binding}"
+                    Content="Сохранить" />
+                <Button
+                    Name="LoadStudent"
+                    Grid.Row="2"
+                    Grid.Column="3"
+                    Margin="10"
+                    Padding="5"
+                    VerticalAlignment="Center"
+                    Command="{Binding}"
+                    Content="Загрузить" />
+            </StackPanel>
+
+
         </Grid>
         <Grid Grid.Row="1">
 

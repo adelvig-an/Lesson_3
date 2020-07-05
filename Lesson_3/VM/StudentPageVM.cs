@@ -51,24 +51,15 @@ namespace Lesson_3.VM
         }
 
         public ICommand DeleteRowCommand { get; }
-        public void DeleteCurrentSelected(object SelectedItems)
-        {
-            IList SelectedStudent = (IList)SelectedItems;
-            //IList SelectedStudent = SelectedItems as IList;
 
-            foreach (var student in SelectedStudent)
-            {
-                if (student != null)
-                {
-                    if (student is Student)
-                    {
-                        StudentList.Remove(student as Student);
-                    }
-                    
-                }
-            }
+        public void DeleteCurrentSelected(object p) 
+        { 
+            IList selectedItems = (IList)p; 
+            foreach (var s in selectedItems.OfType<Student>().ToArray()) 
+            { 
+                StudentList.Remove(s); 
+            } 
         }
-
 
         //Расчет возраста от даты рождения
         public int AgeResalt
