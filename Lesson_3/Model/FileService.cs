@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace Lesson_3.Model
@@ -21,7 +23,7 @@ namespace Lesson_3.Model
 
         public void SaveData (IEnumerable<Student> studentList)
         {
-
+            File.WriteAllLines(PATH, studentList.Select(student => student.ToString()));
         }
     }
 }
