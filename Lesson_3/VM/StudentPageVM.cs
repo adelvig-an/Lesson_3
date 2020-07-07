@@ -109,6 +109,7 @@ namespace Lesson_3.VM
             }
         }
 
+        public ICommand SaveStudent { get; }
 
     }
 }

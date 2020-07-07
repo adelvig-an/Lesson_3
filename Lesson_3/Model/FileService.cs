@@ -11,19 +11,27 @@ namespace Lesson_3.Model
     {
         private readonly string PATH;
 
-        //public FileService(string path)
-        //{
-        //    PATH = path;
-        //}
-        
+        public FileService()
+        {
+            var testData = new Student[]
+            {
+                new Student(),
+                new Student()
+            };
+
+            new FileTxt().SaveData("temp.txt", testData);
+        }
+
         public IEnumerable<Student> LoadData()
         {
             return null;
         }
 
-        public void SaveData (IEnumerable<Student> studentList)
+        public void SaveData (string path, IEnumerable<Student> studentList)
         {
-            File.WriteAllLines(PATH, studentList.Select(student => student.ToString()));
+            File.WriteAllLines(path, studentList.Select(student => student.ToString()));
         }
+
+        
     }
 }
