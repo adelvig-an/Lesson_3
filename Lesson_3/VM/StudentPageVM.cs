@@ -128,10 +128,7 @@ namespace Lesson_3.VM
         public void LoadStudentAction()
         {
             var dataStudentR = fileService.Read(filePath);
-            foreach(var dp in dataStudentR)
-            {
-                StudentList2 = new ObservableCollection<Student>((IEnumerable<Student>)dp);
-            }
+            StudentList = (ObservableCollection<Student>)dataStudentR;
         }
 
     }
