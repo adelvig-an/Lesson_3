@@ -78,7 +78,7 @@
                     Margin="10"
                     Padding="5"
                     VerticalAlignment="Center"
-                    Command="{Binding}"
+                    Command="{Binding SaveStudent}"
                     Content="Сохранить" />
                 <Button
                     Name="LoadStudent"
@@ -87,7 +87,7 @@
                     Margin="10"
                     Padding="5"
                     VerticalAlignment="Center"
-                    Command="{Binding}"
+                    Command="{Binding LoadStudent}"
                     Content="Загрузить" />
             </StackPanel>
 

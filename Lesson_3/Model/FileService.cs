@@ -9,29 +9,8 @@ namespace Lesson_3.Model
 {
     public abstract class FileService
     {
-        private readonly string PATH;
-
-        public FileService()
-        {
-            var testData = new Student[]
-            {
-                new Student(),
-                new Student()
-            };
-
-            new FileTxt().SaveData("temp.txt", testData);
-        }
-
-        public IEnumerable<Student> LoadData()
-        {
-            return null;
-        }
-
-        public void SaveData (string path, IEnumerable<Student> studentList)
-        {
-            File.WriteAllLines(path, studentList.Select(student => student.ToString()));
-        }
-
+        public abstract bool Write(string filePath, IEnumerable<Student> students);
+        public abstract IEnumerable<Student> Read(string filePaht);
         
     }
 }

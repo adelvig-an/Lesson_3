@@ -18,6 +18,7 @@ namespace Lesson_3.VM
     public class StudentPageVM : PageVM
     {
         public Student Student { get; }
+        public FileService FileService;
         
         public static ObservableCollection<Student> StudentList { get; set; }
         public static ObservableCollection<Student> StudentList2 { get; set; }
@@ -41,11 +42,14 @@ namespace Lesson_3.VM
                     //YearUniversity = Student.YearUniversity,
                 }
             };
-            
+
+
             AddStudent = new RelayCommand(_ => AddStudentAction());
             RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
             DeleteRowCommand = new RelayCommand(SelectedItems => DeleteCurrentSelected(SelectedItems));
             FullDelete = new RelayCommand(_ => FullDeleteAction());
+            SaveStudent = new RelayCommand(_ => SaveStudentAction());
+            LoadStudent = new RelayCommand(_ => LoadStudentAction());
         }
 
         public ICommand DeleteRowCommand { get; }
@@ -109,7 +113,26 @@ namespace Lesson_3.VM
             }
         }
 
+        //Сохранить список студентов
+        const string filePath = "temp_student.json";
+        FileService fileService = new FileJson();
         public ICommand SaveStudent { get; }
+        public void SaveStudentAction()
+        { 
+            var b = fileService.Write(filePath, StudentList);
+            MessageBox.Show(b ? "Записано" : "Ошибка");
+        }
+
+        //Загрузить список студентов
+        public ICommand LoadStudent { get; }
+        public void LoadStudentAction()
+        {
+            var dataStudentR = fileService.Read(filePath);
+            foreach(var dp in dataStudentR)
+            {
+                StudentList2 = new ObservableCollection<Student>((IEnumerable<Student>)dp);
+            }
+        }
 
     }
 }
