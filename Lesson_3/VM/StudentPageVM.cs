@@ -1,4 +1,5 @@
 ﻿using Lesson_3.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -35,12 +36,12 @@ namespace Lesson_3.VM
             
             StudentList = new ObservableCollection<Student>()
             {
-                new Student
-                {
-                    //FullName = Student.MiddleName+" "+Student.FirstName+" "+Student.LastName,
-                    //Age = AgeResalt,
-                    //YearUniversity = Student.YearUniversity,
-                }
+                //new Student
+                //{
+                //    //FullName = Student.MiddleName+" "+Student.FirstName+" "+Student.LastName,
+                //    //Age = AgeResalt,
+                //    //YearUniversity = Student.YearUniversity,
+                //}
             };
 
 
@@ -113,22 +114,35 @@ namespace Lesson_3.VM
             }
         }
 
-        //Сохранить список студентов
-        const string filePath = "temp_student.json";
+        SaveFileDialog SaveFileDialog = new SaveFileDialog();
+        OpenFileDialog OpenFileDialog = new OpenFileDialog();
+
+        //Постоянное имя файла
+        //const string filePath = "temp_student.json";
+
+        //Сохраняем список студентов
         FileService fileService = new FileJson();
         public ICommand SaveStudent { get; }
         public void SaveStudentAction()
-        { 
+        {
+            SaveFileDialog.Filter = "json files (*.jon)|*.json|All files (*.*)|*.*";
+            string filePath = SaveFileDialog.FileName;
             var b = fileService.Write(filePath, StudentList);
             MessageBox.Show(b ? "Записано" : "Ошибка");
         }
 
-        //Загрузить список студентов
+        //Загружаем список студентов
         public ICommand LoadStudent { get; }
         public void LoadStudentAction()
         {
+            OpenFileDialog.Filter = "json files (*.jon)|*.json|All files (*.*)|*.*";
+            string filePath = OpenFileDialog.FileName;
             var dataStudentR = fileService.Read(filePath);
-            StudentList = (ObservableCollection<Student>)dataStudentR;
+            StudentList.Clear(); 
+            foreach (var student in dataStudentR) 
+            { 
+                StudentList.Add(student); 
+            }
         }
 
     }
