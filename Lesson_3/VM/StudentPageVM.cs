@@ -116,6 +116,7 @@ namespace Lesson_3.VM
 
         SaveFileDialog SaveFileDialog = new SaveFileDialog();
         OpenFileDialog OpenFileDialog = new OpenFileDialog();
+        
 
         //Постоянное имя файла
         //const string filePath = "temp_student.json";
@@ -126,9 +127,12 @@ namespace Lesson_3.VM
         public void SaveStudentAction()
         {
             SaveFileDialog.Filter = "json files (*.jon)|*.json|All files (*.*)|*.*";
-            string filePath = SaveFileDialog.FileName;
-            var b = fileService.Write(filePath, StudentList);
-            MessageBox.Show(b ? "Записано" : "Ошибка");
+            if (true == SaveFileDialog.ShowDialog())
+            {
+                string filePath = SaveFileDialog.FileName;
+                var b = fileService.Write(filePath, StudentList);
+                MessageBox.Show(b ? "Записано" : "Ошибка");
+            }
         }
 
         //Загружаем список студентов
@@ -136,12 +140,15 @@ namespace Lesson_3.VM
         public void LoadStudentAction()
         {
             OpenFileDialog.Filter = "json files (*.jon)|*.json|All files (*.*)|*.*";
-            string filePath = OpenFileDialog.FileName;
-            var dataStudentR = fileService.Read(filePath);
-            StudentList.Clear(); 
-            foreach (var student in dataStudentR) 
-            { 
-                StudentList.Add(student); 
+            if (true == OpenFileDialog.ShowDialog())
+            {
+                string filePath = OpenFileDialog.FileName;
+                var dataStudentR = fileService.Read(filePath);
+                StudentList.Clear();
+                foreach (var student in dataStudentR)
+                {
+                    StudentList.Add(student);
+                }
             }
         }
 
