@@ -122,11 +122,11 @@ namespace Lesson_3.VM
         //const string filePath = "temp_student.json";
 
         //Сохраняем список студентов
-        FileService fileService = new FileJson();
+        FileService fileService = new FileXml();
         public ICommand SaveStudent { get; }
         public void SaveStudentAction()
         {
-            SaveFileDialog.Filter = "json files (*.jon)|*.json|All files (*.*)|*.*";
+            SaveFileDialog.Filter = "All files (*.*)|*.*|Txt files (*.txt)|*.txt|Xml files (*.xml)|*.xml|Json files (*.jon)|*.json";
             if (true == SaveFileDialog.ShowDialog())
             {
                 string filePath = SaveFileDialog.FileName;
@@ -139,7 +139,7 @@ namespace Lesson_3.VM
         public ICommand LoadStudent { get; }
         public void LoadStudentAction()
         {
-            OpenFileDialog.Filter = "json files (*.jon)|*.json|All files (*.*)|*.*";
+            OpenFileDialog.Filter = "All files (*.*)|*.*|Txt files (*.txt)|*.txt|Xml files (*.xml)|*.xml|Json files (*.jon)|*.json";
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
