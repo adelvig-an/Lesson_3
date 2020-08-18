@@ -11,10 +11,10 @@ namespace Lesson_3.Model
     {
         public override IEnumerable<Student> Read(string filePath)
         {
-            XmlSerializer deserializer = new XmlSerializer(typeof(IEnumerable<Student>));
-            var fs = new FileStream(filePath, FileMode.OpenOrCreate);
+            XmlSerializer deserializer = new XmlSerializer(typeof(Student[]));
+            var fstream = new FileStream(filePath, FileMode.OpenOrCreate);
             return
-                (IEnumerable<Student>)deserializer.Deserialize(fs);
+                (IEnumerable<Student>)deserializer.Deserialize(fstream);
         }
 
         public override bool Write(string filePath, IEnumerable<Student> students)
