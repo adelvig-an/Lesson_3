@@ -10,9 +10,24 @@ namespace Lesson_3.Model
     {
         public override IEnumerable<Student> Read(string filePath)
         {
-            return
-                File.ReadLines(filePath)
-                .Select(Parse);
+            using var reader = new StreamReader(filePath); 
+            while (!reader.EndOfStream) 
+            { 
+                var line1 = reader.ReadLine(); 
+                var line2 = reader.ReadLine(); 
+                var line3 = reader.ReadLine(); 
+                var line4 = reader.ReadLine(); 
+                var line5 = reader.ReadLine(); 
+                var line6 = reader.ReadLine(); 
+                var line7 = reader.ReadLine(); 
+                var line8 = reader.ReadLine(); 
+                var str = string.Join(Environment.NewLine, 
+                    line1, line2, line3, line4, line5, line6, line7, line8); 
+                if (Student.TryParse(str, out Student student))
+                { 
+                    yield return student; 
+                } 
+            }
         }
 
         public override bool Write(string filePath, IEnumerable<Student> students)
@@ -26,11 +41,6 @@ namespace Lesson_3.Model
             {
                 return false;
             }
-        }
-
-        public Student Parse(string str)
-        {
-
         }
     }
 }

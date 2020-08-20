@@ -125,6 +125,7 @@ namespace Lesson_3.VM
         
         FileService fileServiceXml = new FileXml();
         FileService fileServiceJson = new FileJson();
+        FileService fileServiceTxt = new FileTxt();
 
         //Сохраняем список студентов
         public ICommand SaveStudent { get; }
@@ -134,19 +135,15 @@ namespace Lesson_3.VM
             if (true == SaveFileDialog.ShowDialog())
             {
                 string filePath = SaveFileDialog.FileName;
-                FileInfo fileInfo = new FileInfo(filePath);
-                switch (fileInfo.Extension)
-                {
-                    case ".xml":
-                        var filexml = fileServiceXml.Write(filePath, StudentList);
-                        MessageBox.Show(filexml ? "Записано" : "Ошибка");
-                        break;
-                    case ".json":
-                        var filejson = fileServiceJson.Write(filePath, StudentList);
-                        MessageBox.Show(filejson ? "Записано" : "Ошибка");
-                        break;
-
-                }
+                //FileInfo fileInfo = new FileInfo(filePath);
+                var b = Path.GetExtension(filePath) switch 
+                { 
+                    ".xml" => fileServiceXml.Write(filePath, StudentList), 
+                    ".json" => fileServiceJson.Write(filePath, StudentList), 
+                    ".txt" => fileServiceTxt.Write(filePath, StudentList), 
+                    _ => throw new Exception("") 
+                }; 
+                MessageBox.Show(b ? "Записано" : "Ошибка");
             }
         }
 
@@ -158,25 +155,16 @@ namespace Lesson_3.VM
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
-                FileInfo fileInfo = new FileInfo(filePath);
-                switch (fileInfo.Extension)
+                var dataStudentR = Path.GetExtension(filePath) switch
                 {
-                    case ".xml":
-                        var dataStudentXml = fileServiceXml.Read(filePath);
-                        StudentList.Clear();
-                        foreach (var student in dataStudentXml)
-                        {
-                            StudentList.Add(student);
-                        }
-                        break;
-                    case ".json":
-                        var dataStudentJson = fileServiceJson.Read(filePath);
-                        StudentList.Clear();
-                        foreach (var student in dataStudentJson)
-                        {
-                            StudentList.Add(student);
-                        }
-                        break;
+                    ".xml" => fileServiceXml.Read(filePath),
+                    ".json" => fileServiceJson.Read(filePath),
+                    ".txt" => fileServiceTxt.Read(filePath),
+                    _ => throw new Exception("")
+                };
+                foreach (var student in dataStudentR)
+                {
+                    StudentList.Add(student);
                 }
             }
         }
