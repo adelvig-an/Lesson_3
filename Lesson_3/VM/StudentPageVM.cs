@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -66,7 +67,7 @@ namespace Lesson_3.VM
         }
 
         //Расчет возраста от даты рождения
-        public int AgeResalt
+        public int AgeResult
         {
             get
             {
@@ -85,7 +86,7 @@ namespace Lesson_3.VM
             StudentList.Add(new Student()
             {
                 FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
-                Age = AgeResalt,
+                Age = AgeResult,
                 YearUniversity = Student.YearUniversity
             });
         }
@@ -121,17 +122,31 @@ namespace Lesson_3.VM
         //Постоянное имя файла
         //const string filePath = "temp_student.json";
 
+        
+        FileService fileServiceXml = new FileXml();
+        FileService fileServiceJson = new FileJson();
+
         //Сохраняем список студентов
-        FileService fileService = new FileXml();
         public ICommand SaveStudent { get; }
         public void SaveStudentAction()
         {
-            SaveFileDialog.Filter = "All files (*.*)|*.*|Txt files (*.txt)|*.txt|Xml files (*.xml)|*.xml|Json files (*.jon)|*.json";
+            SaveFileDialog.Filter = "Txt files (*.txt)|*.txt|Xml files (*.xml)|*.xml|Json files (*.jon)|*.json|All files (*.*)|*.*";
             if (true == SaveFileDialog.ShowDialog())
             {
                 string filePath = SaveFileDialog.FileName;
-                var b = fileService.Write(filePath, StudentList);
-                MessageBox.Show(b ? "Записано" : "Ошибка");
+                FileInfo fileInfo = new FileInfo(filePath);
+                switch (fileInfo.Extension)
+                {
+                    case ".xml":
+                        var filexml = fileServiceXml.Write(filePath, StudentList);
+                        MessageBox.Show(filexml ? "Записано" : "Ошибка");
+                        break;
+                    case ".json":
+                        var filejson = fileServiceJson.Write(filePath, StudentList);
+                        MessageBox.Show(filejson ? "Записано" : "Ошибка");
+                        break;
+
+                }
             }
         }
 
@@ -139,15 +154,29 @@ namespace Lesson_3.VM
         public ICommand LoadStudent { get; }
         public void LoadStudentAction()
         {
-            OpenFileDialog.Filter = "All files (*.*)|*.*|Txt files (*.txt)|*.txt|Xml files (*.xml)|*.xml|Json files (*.jon)|*.json";
+            OpenFileDialog.Filter = "Txt files (*.txt)|*.txt|Xml files (*.xml)|*.xml|Json files (*.jon)|*.json|All files (*.*)|*.*";
             if (true == OpenFileDialog.ShowDialog())
             {
                 string filePath = OpenFileDialog.FileName;
-                var dataStudentR = fileService.Read(filePath);
-                StudentList.Clear();
-                foreach (var student in dataStudentR)
+                FileInfo fileInfo = new FileInfo(filePath);
+                switch (fileInfo.Extension)
                 {
-                    StudentList.Add(student);
+                    case ".xml":
+                        var dataStudentXml = fileServiceXml.Read(filePath);
+                        StudentList.Clear();
+                        foreach (var student in dataStudentXml)
+                        {
+                            StudentList.Add(student);
+                        }
+                        break;
+                    case ".json":
+                        var dataStudentJson = fileServiceJson.Read(filePath);
+                        StudentList.Clear();
+                        foreach (var student in dataStudentJson)
+                        {
+                            StudentList.Add(student);
+                        }
+                        break;
                 }
             }
         }
