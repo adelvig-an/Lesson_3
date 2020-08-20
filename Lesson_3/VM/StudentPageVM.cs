@@ -85,9 +85,14 @@ namespace Lesson_3.VM
         {
             StudentList.Add(new Student()
             {
-                FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
+                FirstName = Student.FirstName,
+                MiddleName = Student.MiddleName,
+                LastName = Student.LastName,
+                DateBirth = Student.DateBirth,
                 Age = AgeResult,
-                YearUniversity = Student.YearUniversity
+                YearUniversity = Student.YearUniversity,
+                FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
+                IsStudent = Student.IsStudent
             });
         }
 
