@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lesson_3.VM
 {
-    public class PageVM : ViewModelBase
+    public class PageVM : MainVM
     {
     }
 }

@@ -28,21 +28,12 @@ namespace Lesson_3.VM
         {
             Student = new Student
             {
-                //MiddleName = "Иванов",
-                //FirstName = "Сергей",
-                //LastName = "Викторович",
-                //DateBirth = new DateTime(2002, 05, 04),
-                //YearUniversity = "2 курс"
+                
             };
             
             StudentList = new ObservableCollection<Student>()
             {
-                //new Student
-                //{
-                //    //FullName = Student.MiddleName+" "+Student.FirstName+" "+Student.LastName,
-                //    //Age = AgeResalt,
-                //    //YearUniversity = Student.YearUniversity,
-                //}
+                
             };
 
 
@@ -167,6 +158,7 @@ namespace Lesson_3.VM
                     ".txt" => fileServiceTxt.Read(filePath),
                     _ => throw new Exception("")
                 };
+                StudentList.Clear();
                 foreach (var student in dataStudentR)
                 {
                     StudentList.Add(student);
