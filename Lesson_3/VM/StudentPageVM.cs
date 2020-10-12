@@ -19,7 +19,6 @@ namespace Lesson_3.VM
 {
     public class StudentPageVM : PageVM, IDataErrorInfo
     {
-
         public Student Student { get; }
         public FileService FileService;
         
@@ -37,50 +36,12 @@ namespace Lesson_3.VM
                 
             };
 
-
             AddStudent = new RelayCommand(_ => AddStudentAction());
             RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
             DeleteRowCommand = new RelayCommand(SelectedItems => DeleteCurrentSelected(SelectedItems));
             FullDelete = new RelayCommand(_ => FullDeleteAction());
             SaveStudent = new RelayCommand(_ => SaveStudentAction());
             LoadStudent = new RelayCommand(_ => LoadStudentAction());
-        }
-
-        public string Error => "";
-
-        public string this[string columnName]
-        {
-            get
-            {
-                string error = String.Empty;
-
-                switch (columnName)
-                {
-                    case
-                        "MiddleName":
-                        if (Student.MiddleName == null)
-                        {
-                            error = "Фамилия должна быть заполнена";
-                        }
-                        break;
-                    case
-                        "FirstName":
-                        if (Student.FirstName == null)
-                        {
-                            error = "Имя должно быть заполненно";
-                        }
-                        break;
-                    case
-                        "LastName":
-                        if (Student.LastName == null)
-                        {
-                            error = "Отчество должно быть заполненно";
-                        }
-                        break;
-                }
-
-                return error;
-            }
         }
 
         public ICommand DeleteRowCommand { get; }
@@ -151,11 +112,9 @@ namespace Lesson_3.VM
 
         SaveFileDialog SaveFileDialog = new SaveFileDialog();
         OpenFileDialog OpenFileDialog = new OpenFileDialog();
-        
 
         //Постоянное имя файла
         //const string filePath = "temp_student.json";
-
         
         FileService fileServiceXml = new FileXml();
         FileService fileServiceJson = new FileJson();
@@ -205,5 +164,54 @@ namespace Lesson_3.VM
             }
         }
 
+        //Реализация стандартного интерфейса IDtataErrorInfo
+        public string Error => "";
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+
+                switch (columnName)
+                {
+                    case
+                        "MiddleName":
+                        if (Student.MiddleName == null)
+                        {
+                            error = "Фамилия должна быть заполнена";
+                        }
+                        break;
+                    case
+                        "FirstName":
+                        if (Student.FirstName == null)
+                        {
+                            error = "Имя должно быть заполненно";
+                        }
+                        break;
+                    case
+                        "LastName":
+                        if (Student.LastName == null)
+                        {
+                            error = "Отчество должно быть заполненно";
+                        }
+                        break;
+                    case
+                        "DateBirth":
+                        if (Student.DateBirth == DateTime.Today)
+                        {
+                            error = "Укажите верную дату рождения";
+                        }
+                        break;
+                    case
+                        "YearUniversity":
+                        if (Student.YearUniversity == null)
+                            error = "Курс должен быть заполнен";
+                        else if (Student.YearUniversity.Length != 1 )
+                            error = "Укажите правильный курс";
+                        break;
+                }
+                return error;
+            }
+        }
     }
 }
