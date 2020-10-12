@@ -17,8 +17,9 @@ using System.Windows.Input;
 
 namespace Lesson_3.VM
 {
-    public class StudentPageVM : PageVM
+    public class StudentPageVM : PageVM, IDataErrorInfo
     {
+
         public Student Student { get; }
         public FileService FileService;
         
@@ -28,7 +29,7 @@ namespace Lesson_3.VM
         {
             Student = new Student
             {
-                
+                DateBirth = DateTime.Today
             };
             
             StudentList = new ObservableCollection<Student>()
@@ -43,6 +44,43 @@ namespace Lesson_3.VM
             FullDelete = new RelayCommand(_ => FullDeleteAction());
             SaveStudent = new RelayCommand(_ => SaveStudentAction());
             LoadStudent = new RelayCommand(_ => LoadStudentAction());
+        }
+
+        public string Error => "";
+
+        public string this[string columnName]
+        {
+            get
+            {
+                string error = String.Empty;
+
+                switch (columnName)
+                {
+                    case
+                        "MiddleName":
+                        if (Student.MiddleName == null)
+                        {
+                            error = "Фамилия должна быть заполнена";
+                        }
+                        break;
+                    case
+                        "FirstName":
+                        if (Student.FirstName == null)
+                        {
+                            error = "Имя должно быть заполненно";
+                        }
+                        break;
+                    case
+                        "LastName":
+                        if (Student.LastName == null)
+                        {
+                            error = "Отчество должно быть заполненно";
+                        }
+                        break;
+                }
+
+                return error;
+            }
         }
 
         public ICommand DeleteRowCommand { get; }
@@ -145,6 +183,7 @@ namespace Lesson_3.VM
 
         //Загружаем список студентов
         public ICommand LoadStudent { get; }
+
         public void LoadStudentAction()
         {
             OpenFileDialog.Filter = "Txt files (*.txt)|*.txt|Xml files (*.xml)|*.xml|Json files (*.jon)|*.json|All files (*.*)|*.*";

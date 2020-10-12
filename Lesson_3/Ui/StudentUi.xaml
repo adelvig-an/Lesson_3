@@ -39,11 +39,11 @@
 
             <StackPanel Grid.Column="1">
                 <TextBlock Margin="5" Text="Фамилия" />
-                <TextBox Margin="5,0" Text="{Binding Student.MiddleName}" />
+                <TextBox Margin="5,0" Text="{Binding Student.MiddleName, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}" />
                 <TextBlock Margin="5" Text="Имя" />
-                <TextBox Margin="5,0" Text="{Binding Student.FirstName}" />
+                <TextBox Margin="5,0" Text="{Binding Student.FirstName, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}" />
                 <TextBlock Margin="5" Text="Отчество" />
-                <TextBox Margin="5,0" Text="{Binding Student.LastName}" />
+                <TextBox Margin="5,0" Text="{Binding Student.LastName, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, ValidatesOnNotifyDataErrors=True}" />
             </StackPanel>
 
             <StackPanel Grid.Column="3">
