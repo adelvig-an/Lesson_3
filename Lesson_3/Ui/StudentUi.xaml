@@ -21,7 +21,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -147,7 +147,6 @@
                     Command="{Binding LoadStudent}"
                     Content="Загрузить" />
             </StackPanel>
-
 
         </Grid>
         <Grid Grid.Row="2">
