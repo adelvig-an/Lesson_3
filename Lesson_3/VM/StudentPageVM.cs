@@ -211,25 +211,25 @@ namespace Lesson_3.VM
         }
 
         //Свойства для валидации
-        private string middleName;
+        private string middleName = "";
         public string MiddleName 
         { 
             get => middleName; 
             set => SetProperty(ref middleName, value); 
         }
-        private string firstName;
+        private string firstName = "";
         public string FirstName 
         { 
             get => firstName; 
             set => SetProperty(ref firstName, value); 
         }
-        private string lastName;
+        private string lastName = "";
         public string LastName 
         { 
             get=>lastName; 
             set=>SetProperty(ref lastName, value); 
         }
-        private string yearUniversity;
+        private string yearUniversity = "";
         public string YearUniversity 
         { 
             get => yearUniversity; 
