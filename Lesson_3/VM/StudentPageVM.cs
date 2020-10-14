@@ -40,7 +40,6 @@ namespace Lesson_3.VM
                 
             };
 
-            //Список ошибок
             Errors = new ObservableCollection<string>();
 
             AddStudent = new RelayCommand(_ => AddStudentAction());
@@ -80,11 +79,12 @@ namespace Lesson_3.VM
         public ICommand AddStudent { get; }
         public void AddStudentAction()
         {
-            if (Errors == null)
+            if (Errors != null)
             {
                 Validate();
             }
             else
+            {
                 StudentList.Add(new Student()
                 {
                     FirstName = Student.FirstName,
@@ -96,6 +96,8 @@ namespace Lesson_3.VM
                     FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
                     IsStudent = Student.IsStudent
                 });
+            }
+                
         }
 
         //Удаление данных Студента по значению в чекбоксе
