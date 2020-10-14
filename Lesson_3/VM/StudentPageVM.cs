@@ -168,6 +168,7 @@ namespace Lesson_3.VM
             }
         }
 
+        #region Validation
         //Реализация стандартного интерфейса IDtataErrorInfo
         public string Error => "";
         public string this[string columnName]
@@ -203,8 +204,6 @@ namespace Lesson_3.VM
                         "YearUniversity":
                         if (YearUniversity == null)
                             error = "Курс должен быть заполнен";
-                        else if (Student.YearUniversity.Length != 1 )
-                            error = "Укажите правильный курс";
                         break;
                 }
                 return error;
@@ -236,5 +235,6 @@ namespace Lesson_3.VM
             get => yearUniversity; 
             set => SetProperty(ref yearUniversity, value); 
         }
+        #endregion
     }
 }

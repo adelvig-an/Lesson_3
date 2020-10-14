@@ -45,6 +45,7 @@
                         Path="MiddleName"
                         TargetNullValue=""
                         UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnDataErrors="True"
                         ValidatesOnExceptions="True" />
                 </TextBox>
                 <TextBlock Margin="5" Text="Имя" />
@@ -54,6 +55,7 @@
                         Path="FirstName"
                         TargetNullValue=""
                         UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnDataErrors="True"
                         ValidatesOnExceptions="True" />
                 </TextBox>
                 <TextBlock Margin="5" Text="Отчество" />
@@ -63,6 +65,7 @@
                         Path="LastName"
                         TargetNullValue=""
                         UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnDataErrors="True"
                         ValidatesOnExceptions="True" />
                 </TextBox>
             </StackPanel>
@@ -77,6 +80,7 @@
                         Path="YearUniversity"
                         TargetNullValue=""
                         UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnDataErrors="True"
                         ValidatesOnExceptions="True" />
                 </TextBox>
             </StackPanel>
