@@ -39,18 +39,46 @@
 
             <StackPanel Grid.Column="1">
                 <TextBlock Margin="5" Text="Фамилия" />
-                <TextBox Margin="5,0" Text="{Binding Student.MiddleName, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}" />
+                <TextBox Margin="5,0">
+                    <Binding
+                        NotifyOnValidationError="True"
+                        Path="MiddleName"
+                        TargetNullValue=""
+                        UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnExceptions="True" />
+                </TextBox>
                 <TextBlock Margin="5" Text="Имя" />
-                <TextBox Margin="5,0" Text="{Binding Student.FirstName, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}" />
+                <TextBox Margin="5,0">
+                    <Binding
+                        NotifyOnValidationError="True"
+                        Path="FirstName"
+                        TargetNullValue=""
+                        UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnExceptions="True" />
+                </TextBox>
                 <TextBlock Margin="5" Text="Отчество" />
-                <TextBox Margin="5,0" Text="{Binding Student.LastName, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}" />
+                <TextBox Margin="5,0">
+                    <Binding
+                        NotifyOnValidationError="True"
+                        Path="LastName"
+                        TargetNullValue=""
+                        UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnExceptions="True" />
+                </TextBox>
             </StackPanel>
 
             <StackPanel Grid.Column="3">
                 <TextBlock Margin="5" Text="Дата рождения" />
-                <DatePicker Margin="5,0" SelectedDate="{Binding Student.DateBirth, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}" />
+                <DatePicker Margin="5,0" SelectedDate="{Binding Student.DateBirth, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Margin="5" Text="Курс университета" />
-                <TextBox Margin="5,0" Text="{Binding Student.YearUniversity, ValidatesOnDataErrors=True, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=LostFocus}" />
+                <TextBox Margin="5,0">
+                    <Binding
+                        NotifyOnValidationError="True"
+                        Path="YearUniversity"
+                        TargetNullValue=""
+                        UpdateSourceTrigger="PropertyChanged"
+                        ValidatesOnExceptions="True" />
+                </TextBox>
             </StackPanel>
 
             <StackPanel

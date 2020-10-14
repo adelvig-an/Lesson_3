@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace Lesson_3.Model
@@ -28,7 +29,6 @@ namespace Lesson_3.Model
             sb.AppendLine(IsStudent.ToString()); 
             return sb.ToString(); 
         }
-
         public static bool TryParse(string str, out Student student) 
         { 
             student = null; 

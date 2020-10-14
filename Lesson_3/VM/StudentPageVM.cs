@@ -28,7 +28,11 @@ namespace Lesson_3.VM
         {
             Student = new Student
             {
-                DateBirth = DateTime.Today
+                MiddleName = MiddleName,
+                FirstName = FirstName,
+                LastName = LastName,
+                DateBirth = DateTime.Today,
+                YearUniversity = YearUniversity
             };
             
             StudentList = new ObservableCollection<Student>()
@@ -176,35 +180,28 @@ namespace Lesson_3.VM
                 {
                     case
                         "MiddleName":
-                        if (Student.MiddleName == null)
+                        if (MiddleName == null)
                         {
                             error = "Фамилия должна быть заполнена";
                         }
                         break;
                     case
                         "FirstName":
-                        if (Student.FirstName == null)
+                        if (FirstName == null)
                         {
                             error = "Имя должно быть заполненно";
                         }
                         break;
                     case
                         "LastName":
-                        if (Student.LastName == null)
+                        if (LastName == null)
                         {
                             error = "Отчество должно быть заполненно";
                         }
                         break;
                     case
-                        "DateBirth":
-                        if (Student.DateBirth == DateTime.Today)
-                        {
-                            error = "Укажите верную дату рождения";
-                        }
-                        break;
-                    case
                         "YearUniversity":
-                        if (Student.YearUniversity == null)
+                        if (YearUniversity == null)
                             error = "Курс должен быть заполнен";
                         else if (Student.YearUniversity.Length != 1 )
                             error = "Укажите правильный курс";
@@ -212,6 +209,32 @@ namespace Lesson_3.VM
                 }
                 return error;
             }
+        }
+
+        //Свойства для валидации
+        private string middleName;
+        public string MiddleName 
+        { 
+            get => middleName; 
+            set => SetProperty(ref middleName, value); 
+        }
+        private string firstName;
+        public string FirstName 
+        { 
+            get => firstName; 
+            set => SetProperty(ref firstName, value); 
+        }
+        private string lastName;
+        public string LastName 
+        { 
+            get=>lastName; 
+            set=>SetProperty(ref lastName, value); 
+        }
+        private string yearUniversity;
+        public string YearUniversity 
+        { 
+            get => yearUniversity; 
+            set => SetProperty(ref yearUniversity, value); 
         }
     }
 }
