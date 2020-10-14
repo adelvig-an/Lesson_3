@@ -40,6 +40,9 @@ namespace Lesson_3.VM
                 
             };
 
+            //Список ошибок
+            Errors = new ObservableCollection<string>();
+
             AddStudent = new RelayCommand(_ => AddStudentAction());
             RemoveStudent = new RelayCommand(_ => RemoveStudentAction());
             DeleteRowCommand = new RelayCommand(SelectedItems => DeleteCurrentSelected(SelectedItems));
@@ -77,17 +80,22 @@ namespace Lesson_3.VM
         public ICommand AddStudent { get; }
         public void AddStudentAction()
         {
-            StudentList.Add(new Student()
+            if (Errors == null)
             {
-                FirstName = Student.FirstName,
-                MiddleName = Student.MiddleName,
-                LastName = Student.LastName,
-                DateBirth = Student.DateBirth,
-                Age = AgeResult,
-                YearUniversity = Student.YearUniversity,
-                FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
-                IsStudent = Student.IsStudent
-            });
+                Validate();
+            }
+            else
+                StudentList.Add(new Student()
+                {
+                    FirstName = Student.FirstName,
+                    MiddleName = Student.MiddleName,
+                    LastName = Student.LastName,
+                    DateBirth = Student.DateBirth,
+                    Age = AgeResult,
+                    YearUniversity = Student.YearUniversity,
+                    FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
+                    IsStudent = Student.IsStudent
+                });
         }
 
         //Удаление данных Студента по значению в чекбоксе
@@ -183,27 +191,27 @@ namespace Lesson_3.VM
                         "MiddleName":
                         if (MiddleName == null)
                         {
-                            error = "Фамилия должна быть заполнена";
+                            error = "Поле фамилия студента обязательно к заполнению";
                         }
                         break;
                     case
                         "FirstName":
                         if (FirstName == null)
                         {
-                            error = "Имя должно быть заполненно";
+                            error = "Поле именя студента обязательно к заполнению";
                         }
                         break;
                     case
                         "LastName":
                         if (LastName == null)
                         {
-                            error = "Отчество должно быть заполненно";
+                            error = "Поле отчество студента обязательно к заполнению";
                         }
                         break;
                     case
                         "YearUniversity":
                         if (YearUniversity == null)
-                            error = "Курс должен быть заполнен";
+                            error = "Поле курс обязательно к заполнению";
                         break;
                 }
                 return error;
@@ -234,6 +242,35 @@ namespace Lesson_3.VM
         { 
             get => yearUniversity; 
             set => SetProperty(ref yearUniversity, value); 
+        }
+
+        //Список ошибок
+        public ObservableCollection<string> Errors { get; }
+
+        //Добавление и удаление ошибок из списка
+        public void Validate()
+        {
+            Errors.Clear();
+            if (MiddleName == null || MiddleName == "")
+            {
+                Errors.Add(new string("Поле фамилия студента обязательно к заполнению"));
+            }
+            if (FirstName == null || FirstName == "")
+            {
+                Errors.Add(new string("Поле имя студента обязательно к заполнению"));
+            }
+            if (LastName == null || LastName == "")
+            {
+                Errors.Add(new string("Поле отчетство студента обязательно к заполнению"));
+            }
+            if (YearUniversity == null || YearUniversity == "")
+            {
+                Errors.Add(new string("Поле курс обязательно к заполнению"));
+            }
+            if (Errors.Count > 0)
+            {
+                return;
+            }
         }
         #endregion
     }
