@@ -35,10 +35,7 @@ namespace Lesson_3.VM
                 YearUniversity = YearUniversity
             };
             
-            StudentList = new ObservableCollection<Student>()
-            {
-                
-            };
+            StudentList = new ObservableCollection<Student>();
 
             Errors = new ObservableCollection<string>();
 
@@ -89,13 +86,13 @@ namespace Lesson_3.VM
             {
                 StudentList.Add(new Student()
                 {
-                    FirstName = Student.FirstName,
-                    MiddleName = Student.MiddleName,
-                    LastName = Student.LastName,
+                    FirstName = FirstName,
+                    MiddleName = MiddleName,
+                    LastName = LastName,
                     DateBirth = Student.DateBirth,
                     Age = AgeResult,
-                    YearUniversity = Student.YearUniversity,
-                    FullName = Student.MiddleName + " " + Student.FirstName + " " + Student.LastName,
+                    YearUniversity = YearUniversity,
+                    FullName = MiddleName + " " + FirstName + " " + LastName,
                     IsStudent = Student.IsStudent
                 });
             }
