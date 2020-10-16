@@ -272,7 +272,6 @@ namespace Lesson_3.VM
                 IsVisible = true;
                 return;
             }
-            
         }
 
         private bool isVisible;
