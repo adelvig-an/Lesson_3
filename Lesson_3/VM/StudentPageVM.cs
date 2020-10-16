@@ -19,7 +19,7 @@ namespace Lesson_3.VM
 {
     public class StudentPageVM : PageVM, IDataErrorInfo
     {
-        public Student Student { get; }
+        public Student Student { get; set; }
         public FileService FileService;
         
         public static ObservableCollection<Student> StudentList { get; set; }
@@ -48,6 +48,7 @@ namespace Lesson_3.VM
             FullDelete = new RelayCommand(_ => FullDeleteAction());
             SaveStudent = new RelayCommand(_ => SaveStudentAction());
             LoadStudent = new RelayCommand(_ => LoadStudentAction());
+            ErrorBarClosed = new RelayCommand(_ => ErrorBarClosedCommand());
         }
 
         public ICommand DeleteRowCommand { get; }
@@ -271,16 +272,23 @@ namespace Lesson_3.VM
             }
             if (Errors.Count > 0)
             {
+                IsVisible = true;
                 return;
             }
-            IsValidate = true;
+            
         }
 
-        private bool isValidate;
-        public bool IsValidate
+        private bool isVisible;
+        public bool IsVisible
         {
-            get => isValidate;
-            set => SetProperty(ref isValidate, value);
+            get => isVisible;
+            set => SetProperty(ref isVisible, value);
+        }
+
+        public ICommand ErrorBarClosed { get; }
+        public bool ErrorBarClosedCommand()
+        {
+            return IsVisible = false;
         }
         #endregion
     }

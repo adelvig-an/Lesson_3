@@ -17,6 +17,14 @@
             <Setter Property="Height" Value="24" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
+        <Style x:Key="MyErrorButton" TargetType="Button">
+            <Setter Property="Background" Value="red" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="Padding" Value="7" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="White" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -25,26 +33,32 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid>
-        <ItemsControl ItemsSource="{Binding Errors}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Background="Red">
-                        <TextBlock Foreground="White" Text="{Binding .}" />
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-        <Button
-                            Margin="10"
-                            Padding="7"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Background="Red"
-                            Command="{Binding}"
-                            Content="Скрыть ошибки"
-                            Foreground="White" />
+        <Grid Background="Red" Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ItemsControl ItemsSource="{Binding Errors}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Background="Red">
+                            <TextBlock
+                                Margin="5"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Text="{Binding .}" />
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Button
+                
+                Grid.Row="1"
+                Command="{Binding ErrorBarClosed}"
+                Content="Скрыть ошибки"
+                Style="{DynamicResource MyErrorButton}" />
         </Grid>
+
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
