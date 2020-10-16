@@ -25,16 +25,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <Grid>
         <ItemsControl ItemsSource="{Binding Errors}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Background="Red">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
                         <TextBlock Foreground="White" Text="{Binding .}" />
-                        <Button
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Button
                             Margin="10"
                             Padding="7"
                             HorizontalAlignment="Center"
@@ -43,10 +44,7 @@
                             Command="{Binding}"
                             Content="Скрыть ошибки"
                             Foreground="White" />
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </Grid>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

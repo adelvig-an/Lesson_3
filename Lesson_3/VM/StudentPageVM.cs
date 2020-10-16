@@ -79,7 +79,8 @@ namespace Lesson_3.VM
         public ICommand AddStudent { get; }
         public void AddStudentAction()
         {
-            if (Errors != null)
+            Validate();
+            if (Errors.Count != 0)
             {
                 Validate();
             }
@@ -97,7 +98,6 @@ namespace Lesson_3.VM
                     IsStudent = Student.IsStudent
                 });
             }
-                
         }
 
         //Удаление данных Студента по значению в чекбоксе
@@ -273,6 +273,14 @@ namespace Lesson_3.VM
             {
                 return;
             }
+            IsValidate = true;
+        }
+
+        private bool isValidate;
+        public bool IsValidate
+        {
+            get => isValidate;
+            set => SetProperty(ref isValidate, value);
         }
         #endregion
     }
